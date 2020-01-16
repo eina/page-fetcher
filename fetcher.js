@@ -1,11 +1,3 @@
-/**
- * Workflow 
- * 
- * 1. take command line arguments: URL, local file path
- * 2. want to see if i can log the command line arguments
- * 3. do a request from one of the args
- * 4. write to the file
- */
 const request = require('request');
 const fs = require('fs');
 const readline = require('readline');
@@ -13,6 +5,8 @@ const readline = require('readline');
 const args = process.argv.slice(2);
 const url = args[0];
 const path = args[1];
+
+console.log(args)
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -24,13 +18,15 @@ const writeToPath = (path, content) => {
     if(error) {
       console.log('writeFile error: ', error)   
     } else {
-      console.log('file created successfuly!')
+      console.log(`Downloaded and saved 3261 bytes to ${path}`)
     }
   })
 }
 
+
+
 // check if path is valid
-if( !(/^(.(.*\.txt$|.*\.html))*$/g.test(path)) ) {
+if( path && !(/^(.(.*\.txt$|.*\.html))*$/g.test(path)) ) {
   console.log('Error: invalid file type')
 }
 
