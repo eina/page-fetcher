@@ -6,8 +6,6 @@ const args = process.argv.slice(2);
 const url = args[0];
 const path = args[1];
 
-console.log(args)
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -18,7 +16,12 @@ const writeToPath = (path, content) => {
     if(error) {
       console.log('writeFile error: ', error)   
     } else {
-      console.log(`Downloaded and saved 3261 bytes to ${path}`)
+      fs.stat(path, (err, stats) => {
+        if(err) {
+          console.log('writeFile error: ', error);
+        }
+        console.log(`Downloaded and saved ${stats && stats.size} bytes to ${path}`)
+      })      
     }
   })
 }
